@@ -1,6 +1,6 @@
 import sqlite3
 import datetime
-
+import fire
 
 conn = sqlite3.connect("expenses.db")
 cur = conn.cursor()
@@ -24,11 +24,9 @@ while True:
             print(f"{index + 1}, {category[0]}")
         print(f"{len(categories) + 1}. Create a category")
 
-        category_choise = input()
-        if category_choise == len(categories) + 1:
-            category = input("Enter the new name of category:")
-        else:
-            category = categories[category_choise - 1][0]
+        category_choise = input("Enter the category number: ")
+        category_choise = int(category_choise)
+        category = categories[category_choise - 1][0]
 
         price = input("Enter the price of expense: ")
         cur.execute("INSERT INTO expenses(Date, description, category, price)")
